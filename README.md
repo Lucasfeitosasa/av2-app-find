@@ -14,7 +14,6 @@ Aplicativo Flutter/Dart para divulgar e consultar objetos perdidos ou encontrado
 - Mostra carregamento, impede envios duplicados, informa falhas de conexão e permite tentar novamente.
 - Usa Material 3 e interface em português.
 
-O app não inclui autenticação, edição, exclusão, imagens, busca avançada nem registros fictícios.
 
 ## Armazenamento remoto
 
@@ -69,22 +68,3 @@ flutter run `
   --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_SUA_CHAVE
 ```
 
-O app é destinado a Android e iOS. Os parâmetros também podem ser informados ao `flutter build` para compilar o aplicativo. Sem os dois parâmetros, o app explica que a integração precisa ser configurada.
-
-## Formatação e análise
-
-```bash
-dart format .
-flutter analyze
-```
-
-## Repositório e histórico
-
-O histórico Git registra as etapas realizadas durante a implementação. Para publicar o projeto, crie um repositório público no GitHub e associe-o como remoto:
-
-```bash
-git remote add origin https://github.com/SEU-USUARIO/achados-e-perdidos.git
-git push -u origin main
-```
-
-Não versionar credenciais privadas, arquivos gerados ou artefatos de compilação.
