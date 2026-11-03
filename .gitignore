@@ -1,0 +1,26 @@
+# Flutter and Dart generated files
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+/build/
+/coverage/
+/doc/api/
+/android/local.properties
+/ios/Flutter/.last_build_id
+/ios/Flutter/Generated.xcconfig
+/ios/ServiceDefinitions.json
+/web/flutter_service_worker.js
+
+# IDE and local machine files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Local credentials (the public Supabase anon key is provided with --dart-define)
+.env
+.env.*
+!.env.example
