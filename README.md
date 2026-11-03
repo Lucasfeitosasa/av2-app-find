@@ -36,18 +36,23 @@ create table public.items (
 
 alter table public.items enable row level security;
 
+revoke all on table public.items from anon, authenticated;
+grant usage on schema public to anon;
+grant select, insert on table public.items to anon;
+
 create policy "Public can read items"
   on public.items for select to anon using (true);
 
 create policy "Public can add items"
   on public.items for insert to anon with check (true);
 
-grant select, insert on public.items to anon;
 ```
 
 3. Em **Project Settings → API Keys**, copie o **Project URL** e a chave **Publishable** (`sb_publishable_...`). Não use a chave **Secret** (`sb_secret_...`).
 
 Como a avaliação não exige autenticação, os registros podem ser lidos e inseridos publicamente. Cadastre apenas dados demonstrativos, sem informações pessoais ou sensíveis. A política permite somente leitura e inserção; não permite edição nem exclusão.
+
+Em **Integrations → Data API**, confirme que o schema `public` está exposto. Os `GRANT`s acima liberam apenas leitura e inserção da tabela `items` para o papel `anon`; a RLS aplica as políticas correspondentes.
 
 ## Configuração e execução
 
