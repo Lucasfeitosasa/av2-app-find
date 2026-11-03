@@ -48,7 +48,12 @@ create policy "Public can add items"
 
 ```
 
-3. Em **Project Settings → API Keys**, copie o **Project URL** e a chave **Publishable** (`sb_publishable_...`). Não use a chave **Secret** (`sb_secret_...`).
+3. O projeto configurado para esta aplicação usa a URL `https://dsjxfkqitrdyjpahsqau.supabase.co` e a chave **Publishable** abaixo. Ela é pública e própria para uso no app. Não use nem publique uma chave **Secret** (`sb_secret_...`).
+
+```text
+Project URL: https://dsjxfkqitrdyjpahsqau.supabase.co
+Publishable key: sb_publishable_QgoQ1HitOrk58XD2Wyvcaw_YP6lQq8A
+```
 
 Como a avaliação não exige autenticação, os registros podem ser lidos e inseridos publicamente. Cadastre apenas dados demonstrativos, sem informações pessoais ou sensíveis. A política permite somente leitura e inserção; não permite edição nem exclusão.
 
@@ -61,15 +66,15 @@ Instale o Flutter SDK e confirme `flutter doctor`. Na raiz do projeto, execute:
 ```bash
 flutter pub get
 flutter run \
-  --dart-define=SUPABASE_URL=https://SEU-PROJETO.supabase.co \
-  --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_SUA_CHAVE
+  --dart-define=SUPABASE_URL=https://dsjxfkqitrdyjpahsqau.supabase.co \
+  --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_QgoQ1HitOrk58XD2Wyvcaw_YP6lQq8A
 ```
 
 No PowerShell, a continuação pode ser escrita assim:
 
 ```powershell
 flutter run `
-  --dart-define=SUPABASE_URL=https://SEU-PROJETO.supabase.co `
-  --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_SUA_CHAVE
+  --dart-define=SUPABASE_URL=https://dsjxfkqitrdyjpahsqau.supabase.co `
+  --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_QgoQ1HitOrk58XD2Wyvcaw_YP6lQq8A
 ```
 
