@@ -75,7 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Text(
                       'Conte o que aconteceu',
                       style: Theme.of(context).textTheme.headlineSmall
-                          ?.copyWith(fontWeight: FontWeight.w700),
+                          ?.copyWith(color: const Color(0xFF183153), fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -169,14 +169,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       icon: isSubmitting
                           ? const SizedBox.square(
                               dimension: 18,
-                              child: CircularProgressIndicator(strokeWidth: 2),
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
                             )
-                          : const Icon(Icons.check),
+                          : const Icon(Icons.add),
                       label: Text(
-                        isSubmitting ? 'Salvando...' : 'Salvar registro',
+                        isSubmitting ? 'Publicando...' : 'Publicar objeto',
                       ),
                       style: FilledButton.styleFrom(
-                        minimumSize: const Size.fromHeight(54),
+                        backgroundColor: const Color(0xFF183153),
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size.fromHeight(50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                   ],

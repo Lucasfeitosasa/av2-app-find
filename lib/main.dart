@@ -33,15 +33,21 @@ class _LostAndFoundAppState extends State<LostAndFoundApp> {
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'Achados e Perdidos',
+    
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       useMaterial3: true,
+      fontFamily: 'Inter',
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF126D62),
-        surface: const Color(0xFFF7F8F6),
+        seedColor: const Color(0xFF183153),
+        surface: const Color(0xFFF5F7FA),
       ),
-      scaffoldBackgroundColor: const Color(0xFFF7F8F6),
-      appBarTheme: const AppBarTheme(centerTitle: false),
+      scaffoldBackgroundColor: const Color(0xFFF5F7FA),
+      appBarTheme: const AppBarTheme(
+        centerTitle: false,
+        backgroundColor: Color(0xFFF5F7FA),
+        foregroundColor: Color(0xFF183153),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: Colors.white,
@@ -51,7 +57,7 @@ class _LostAndFoundAppState extends State<LostAndFoundApp> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: Color(0xFFE3E8E5)),
+          borderSide: const BorderSide(color: Color(0xFFDCE3ED)),
         ),
       ),
     ),
