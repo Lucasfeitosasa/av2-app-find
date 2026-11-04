@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../models/lost_item.dart';
 import '../state/item_controller.dart';
+import '../widgets/item_card.dart';
+import '../widgets/list_states.dart';
 import 'register_screen.dart';
 
 enum _StatusFilter { all, lost, found }
@@ -108,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller.items.isEmpty)
               SliverFillRemaining(
                 hasScrollBody: false,
-                child: _ErrorState(
+                child: ListErrorState(
                   message: controller.errorMessage!,
                   onRetry: controller.loadItems,
                 ),
@@ -116,12 +118,12 @@ class _HomeScreenState extends State<HomeScreen> {
             else if (controller.items.isEmpty)
               const SliverFillRemaining(
                 hasScrollBody: false,
-                child: _EmptyState(),
+                child: ListEmptyState(),
               )
             else if (visibleItems.isEmpty)
               const SliverFillRemaining(
                 hasScrollBody: false,
-                child: _EmptyState(filtered: true),
+                child: ListEmptyState(filtered: true),
               )
             else
               SliverPadding(
@@ -130,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: visibleItems.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 12),
                   itemBuilder: (context, index) =>
-                      _ItemCard(item: visibleItems[index]),
+                      ItemCard(item: visibleItems[index]),
                 ),
               ),
           ],
@@ -263,171 +265,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-
-class _ItemCard extends StatelessWidget {
-  const _ItemCard({required this.item});
-
-  final LostItem item;
-
-  @override
-  Widget build(BuildContext context) {
-    final isFound = item.status == ItemStatus.found;
-    final color = isFound ? const Color(0xFF13795B) : const Color(0xFFB85A1B);
-    final background = isFound
-        ? const Color(0xFFE7F4EE)
-        : const Color(0xFFFFF1E6);
-    final date = item.createdAt.toLocal();
-    final formattedDate =
-        '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year} às ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
-    return Card(
-      margin: EdgeInsets.zero,
-      color: Colors.white,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
-        side: const BorderSide(color: Color(0xFFDCE3ED)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              alignment: WrapAlignment.spaceBetween,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Text(
-                  item.name,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(
-                    color: const Color(0xFF183153),
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 11,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: background,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Text(
-                    item.status.label,
-                    style: TextStyle(
-                      color: color,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              item.description,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 14),
-            Row(
-              children: [
-                const Icon(
-                  Icons.place_outlined,
-                  size: 18,
-                  color: Color(0xFF66758C),
-                ),
-                const SizedBox(width: 6),
-                Expanded(child: Text(item.location)),
-              ],
-            ),
-            const SizedBox(height: 7),
-            Row(
-              children: [
-                const Icon(
-                  Icons.schedule,
-                  size: 16,
-                  color: Color(0xFF66758C),
-                ),
-                const SizedBox(width: 6),
-                Text(
-                  formattedDate,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: const Color(0xFF66758C),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _EmptyState extends StatelessWidget {
-  const _EmptyState({this.filtered = false});
-
-  final bool filtered;
-
-  @override
-  Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: const EdgeInsets.all(32),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.inventory_2_outlined,
-            size: 52,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            filtered ? 'Nenhum objeto nessa categoria' : 'Nenhum objeto cadastrado',
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          const SizedBox(height: 7),
-          Text(
-            filtered
-                ? 'Escolha outra situação para ver os registros disponíveis.'
-                : 'Os registros publicados no campus aparecerão aqui.',
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-class _ErrorState extends StatelessWidget {
-  const _ErrorState({required this.message, required this.onRetry});
-
-  final String message;
-  final VoidCallback onRetry;
-
-  @override
-  Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: const EdgeInsets.all(28),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.cloud_off_outlined, size: 48),
-          const SizedBox(height: 16),
-          Text(message, textAlign: TextAlign.center),
-          const SizedBox(height: 14),
-          FilledButton.icon(
-            onPressed: onRetry,
-            icon: const Icon(Icons.refresh),
-            label: const Text('Tentar novamente'),
-          ),
-        ],
-      ),
-    ),
-  );
 }
