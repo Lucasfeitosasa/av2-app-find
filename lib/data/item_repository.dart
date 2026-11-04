@@ -6,11 +6,19 @@ import '../models/lost_item.dart';
 
 class ItemRepository {
   ItemRepository({String? projectUrl, String? publishableKey})
-    : _projectUrl = (projectUrl ?? const String.fromEnvironment('SUPABASE_URL'))
-          .replaceFirst(RegExp(r'/+$'), ''),
+    : _projectUrl =
+          (projectUrl ??
+                  const String.fromEnvironment(
+                    'SUPABASE_URL',
+                    defaultValue: 'https://dsjxfkqitrdyjpahsqau.supabase.co',
+                  ))
+              .replaceFirst(RegExp(r'/+$'), ''),
       _publishableKey =
           publishableKey ??
-          const String.fromEnvironment('SUPABASE_PUBLISHABLE_KEY');
+          const String.fromEnvironment(
+            'SUPABASE_PUBLISHABLE_KEY',
+            defaultValue: 'sb_publishable_QgoQ1HitOrk58XD2Wyvcaw_YP6lQq8A',
+          );
 
   final String _projectUrl;
   final String _publishableKey;
